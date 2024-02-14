@@ -28,4 +28,5 @@ FeedbackStats.propTypes = {
     })
   ),
 };
+
 export default FeedbackStats;
