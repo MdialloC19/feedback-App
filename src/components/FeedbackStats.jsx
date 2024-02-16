@@ -1,6 +1,10 @@
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
-function FeedbackStats({ feedback }) {
+import { useContext } from "react";
+import FeedbackContext from "../context/FeedbackContext";
+
+function FeedbackStats() {
+  const { feedback } = useContext(FeedbackContext);
   if (!feedback || feedback.length === 0) {
     return <div className="feedback-stats">No feedback available</div>;
   }
@@ -19,14 +23,14 @@ function FeedbackStats({ feedback }) {
   );
 }
 
-FeedbackStats.propTypes = {
-  feedback: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-    })
-  ),
-};
+// FeedbackStats.propTypes = {
+//   feedback: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       text: PropTypes.string.isRequired,
+//       rating: PropTypes.number.isRequired,
+//     })
+//   ),
+// };
 
 export default FeedbackStats;

@@ -14,6 +14,7 @@ import FeedbackList from "./components/FeedbackList";
 import FeedbackStats from "./components/FeedbackStats";
 import FeedbackForm from "./components/FeedbackForm";
 import AboutIconLink from "./components/AboutIconLink";
+import { FeedbackProvider } from "./context/FeedbackContext";
 
 // import Post from "./components/Post";
 function App() {
@@ -29,28 +30,26 @@ function App() {
   };
 
   return (
-    <Router>
-      <Header />
-      <div className="container">
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <>
-                <FeedbackForm handleAdd={addNewFeedback} />
-                <FeedbackStats feedback={feedback} />
-                <FeedbackList
-                  feedback={feedback}
-                  handleDelete={deleteFeedback}
-                />
-              </>
-            }
-          />
-          <Route path="/about" element={<AboutPage />} />
-          {/* <Route path="/post/*" element={<Post />} /> */}
-        </Routes>
-        {/* 
+    <FeedbackProvider>
+      <Router>
+        <Header />
+        <div className="container">
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <>
+                  <FeedbackForm handleAdd={addNewFeedback} />
+                  <FeedbackStats />
+                  <FeedbackList handleDelete={deleteFeedback} />
+                </>
+              }
+            />
+            <Route path="/about" element={<AboutPage />} />
+            {/* <Route path="/post/*" element={<Post />} /> */}
+          </Routes>
+          {/* 
           Just for experimenting some stuff
         <Card>
           <NavLink to="/" activeClassName="active">
@@ -59,9 +58,10 @@ function App() {
           <NavLink to="/about">About</NavLink>
         </Card>
         */}
-        <AboutIconLink />
-      </div>
-    </Router>
+          <AboutIconLink />
+        </div>
+      </Router>
+    </FeedbackProvider>
   );
 }
 
