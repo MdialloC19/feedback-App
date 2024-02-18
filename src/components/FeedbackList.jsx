@@ -5,10 +5,10 @@ import FeedbackItem from "./FeedbackItem";
 // import Spinner from "./shared/Spinner";
 import { motion, AnimatePresence } from "framer-motion";
 
-function FeedbackList({ Delete }) {
-  const { feedback, isLoading } = useContext(FeedbackContext);
+function FeedbackList() {
+  const { feedback } = useContext(FeedbackContext);
 
-  if (!isLoading && (!feedback || feedback.length === 0)) {
+  if (!feedback || feedback.length === 0) {
     return <p>No Feedback Yet</p>;
   }
 
