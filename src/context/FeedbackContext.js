@@ -1,6 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-import { json } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
@@ -13,7 +11,7 @@ export const FeedbackProvider = ({ children }) => {
 
   useEffect(() => {
     fetchFeedback();
-  }, []);
+  }, feedback);
 
   const fetchFeedback = async () => {
     try {
@@ -30,9 +28,16 @@ export const FeedbackProvider = ({ children }) => {
     }
   };
 
-  const deleteFeedback = (id) => {
+  const deleteFeedback = async (id) => {
     if (window.confirm("Are you sure, you want to delete ?")) {
-      setFeedback(feedback.filter((item) => item.id !== id));
+      try {
+        await fetch(`http://localhost:5000/feedback/${id}`, {
+          method: "DELETE",
+        });
+        setFeedback(feedback.filter((item) => item.id !== id));
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
   const addNewFeedback = async (newFeedback) => {
@@ -53,8 +58,24 @@ export const FeedbackProvider = ({ children }) => {
     // newFeedback.id = uuidv4();
     // setFeedback([newFeedback, ...feedback]);
   };
-  const updateFeedback = (id, newValue) => {
-    setFeedback(feedback.map((item) => (item.id === id ? newValue : item)));
+  const updateFeedback = async (id, newValue) => {
+    try {
+      const response = await fetch(`http://localhost:5000/feedback/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(newValue),
+      });
+      const data = response.json();
+      setFeedback(feedback.map((item) => (item.id === id ? data : item)));
+      setFeedbackEdit({
+        item: {},
+        edit: false,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
 
     setFeedbackEdit({
       item: {},
