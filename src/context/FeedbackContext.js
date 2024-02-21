@@ -11,38 +11,42 @@ export const FeedbackProvider = ({ children }) => {
 
   useEffect(() => {
     fetchFeedback();
-  }, feedback);
+  }, []);
 
   const fetchFeedback = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/feedback?_sort=rating&-view`
-      );
+      const response = await fetch(`/feedback?_sort=rating&-view`);
 
       const data = await response.json();
-      console.log(response);
+
       setFeedback(data);
-      setIsLoading(false);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const deleteFeedback = async (id) => {
+    setIsLoading(true);
     if (window.confirm("Are you sure, you want to delete ?")) {
       try {
-        await fetch(`http://localhost:5000/feedback/${id}`, {
+        await fetch(`/feedback/${id}`, {
           method: "DELETE",
         });
         setFeedback(feedback.filter((item) => item.id !== id));
       } catch (error) {
         console.log(error.message);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
+
   const addNewFeedback = async (newFeedback) => {
+    setIsLoading(false);
     try {
-      const response = await fetch("http://localhost:5000/feedback", {
+      const response = await fetch("/feedback", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -50,17 +54,17 @@ export const FeedbackProvider = ({ children }) => {
         body: JSON.stringify(newFeedback),
       });
 
-      const data = response.json();
+      const data = await response.json();
       setFeedback([data, ...feedback]);
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setIsLoading(false);
     }
-    // newFeedback.id = uuidv4();
-    // setFeedback([newFeedback, ...feedback]);
   };
   const updateFeedback = async (id, newValue) => {
     try {
-      const response = await fetch(`http://localhost:5000/feedback/${id}`, {
+      const response = await fetch(`/feedback/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

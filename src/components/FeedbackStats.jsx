@@ -23,14 +23,4 @@ function FeedbackStats() {
   );
 }
 
-// FeedbackStats.propTypes = {
-//   feedback: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       text: PropTypes.string.isRequired,
-//       rating: PropTypes.number.isRequired,
-//     })
-//   ),
-// };
-
 export default FeedbackStats;

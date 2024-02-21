@@ -1,18 +1,23 @@
 {
   "feedback": [
     {
-      "id": "1",
-      "rating": 10,
-      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae."
+      "id": "013a",
+      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. ",
+      "rating": 10
     },
     {
-      "id": "2",
-      "rating": 9,
-      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae."
+      "id": "6168",
+      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. test ",
+      "rating": 10
     },
     {
-      "id": "e7fa",
-      "text": "Lorem ipsum dolor sit amet consectetur adipisicing  elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa qu-----------ae.",
+      "id": "e866",
+      "text": "ok on va faire un test sur UseEffect()",
+      "rating": 10
+    },
+    {
+      "id": "c7b1",
+      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. ",
       "rating": 10
     }
   ]
